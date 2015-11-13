@@ -1,0 +1,61 @@
+body {
+  background-color: black;
+  font-size: 0px;
+  padding: 0px;
+}
+
+.top, .chip, .board, .row, .left, .right{
+  display: flex;
+  text-align: center;
+  flex-direction: row;
+  justify-content: center;
+}
+.tile {
+  font-family: sans-serif;
+  height: 50px;
+  width: 50px;
+  color: white;
+  vertical-align: top;
+  text-align: center;
+  font-size: 10px;
+  border: 1px solid red;
+  margin: 1px 1px 1px 1px;
+  border-radius: 5px;
+}
+.tileboard {
+  font-family: sans-serif;
+  height: 50px;
+  width: 50px;
+  color: white;
+  vertical-align: top;
+  text-align: center;
+  font-size: 10px;
+  border: 1px solid green;
+  margin: 1px 1px 1px 1px;
+  border-radius: 25px;
+}
+
+.tilechip {
+  font-family: sans-serif;
+  height: 50px;
+  width: 50px;
+  color: white;
+  vertical-align: top;
+  text-align: center;
+  font-size: 10px;
+  border: 1px solid blue;
+  margin: 1px 1px 1px 1px;
+  border-radius: 5px;
+}
+#left {
+  font-family: sans-serif;
+  height: 50px;
+  width: 50px;
+  color: white;
+  vertical-align: top;
+  text-align: center;
+  font-size: 30px;
+  border: 1px solid red;
+  margin: 1px 1px 1px 1px;
+  border-radius: 5px;
+}

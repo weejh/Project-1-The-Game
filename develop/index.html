@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Four In A Row</title>
+    <script type="text/javascript">
+
+    </script>
+    <link rel="stylesheet" href="four.css">
+  </head>
+  <body>
+    <div class="top">
+      <div class='left'>
+        <div class="tile" id='lefttopstatus'></div>
+        <div class='tile' id='lefttopblank'> </div>
+      </div>
+      <div class='chip'>
+        <div class='tilechip' id='chip0'></div>
+        <div class='tilechip' id='chip1'></div>
+        <div class='tilechip' id='chip2'></div>
+        <div class='tilechip' id='chip3'></div>
+        <div class='tilechip' id='chip4'></div>
+        <div class='tilechip' id='chip5'></div>
+        <div class='tilechip' id='chip6'></div>
+      </div>
+      <div class='right'>
+        <div class='tile' id='righttopblank0'> </div>
+        <div class='tile' id='righttopblank1'> </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="left">
+        <div class="tile" id='left0status'></div>
+        <div class="tile" id='left0blank'> </div>
+      </div>
+      <div class="board">
+        <div class='tileboard' id='00'></div>
+        <div class='tileboard' id='01'></div>
+        <div class='tileboard' id='02'></div>
+        <div class='tileboard' id='03'></div>
+        <div class='tileboard' id='04'></div>
+        <div class='tileboard' id='05'></div>
+        <div class='tileboard' id='06'></div>
+      </div>
+      <div class="right">
+        <div class="tile" id='right0blank'> </div>
+        <div class="tile" id='right0status'></div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="left">
+        <div class="tile" id='left1status'>Status</div>
+        <div class="tile" id='left1blank'> </div>
+      </div>
+      <div class="board">
+        <div class='tileboard' id='10'></div>
+        <div class='tileboard' id='11'></div>
+        <div class='tileboard' id='12'></div>
+        <div class='tileboard' id='13'></div>
+        <div class='tileboard' id='14'></div>
+        <div class='tileboard' id='15'></div>
+        <div class='tileboard' id='16'></div>
+      </div>
+      <div class="right">
+        <div class="tile" id='right1blank'> </div>
+        <div class="tile" id='right1status'></div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="left">
+        <div class="tile" id='left2status'></div>
+        <div class="tile" id='left2blank'> </div>
+      </div>
+      <div class="board">
+        <div class='tileboard' id='20'></div>
+        <div class='tileboard' id='21'></div>
+        <div class='tileboard' id='22'></div>
+        <div class='tileboard' id='23'></div>
+        <div class='tileboard' id='24'></div>
+        <div class='tileboard' id='25'></div>
+        <div class='tileboard' id='26'></div>
+      </div>
+      <div class="right">
+        <div class="tile" id='right2blank'> </div>
+        <div class="tile" id='right2status'></div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="left">
+        <div class="tile" id='left3status'></div>
+        <div class="tile" id='left3blank'> </div>
+      </div>
+      <div class="board">
+        <div class='tileboard' id='30'></div>
+        <div class='tileboard' id='31'></div>
+        <div class='tileboard' id='32'></div>
+        <div class='tileboard' id='33'></div>
+        <div class='tileboard' id='34'></div>
+        <div class='tileboard' id='35'></div>
+        <div class='tileboard' id='36'></div>
+      </div>
+      <div class="right">
+        <div class="tile" id='right3blank'> </div>
+        <div class="tile" id='right3status'></div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="left">
+        <div class="tile" id='left4status'></div>
+        <div class="tile" id='left4blank'> </div>
+      </div>
+      <div class="board">
+        <div class='tileboard' id='40'></div>
+        <div class='tileboard' id='41'></div>
+        <div class='tileboard' id='42'></div>
+        <div class='tileboard' id='43'></div>
+        <div class='tileboard' id='44'></div>
+        <div class='tileboard' id='45'></div>
+        <div class='tileboard' id='46'></div>
+      </div>
+      <div class="right">
+        <div class="tile" id='right4blank'> </div>
+        <div class="tile" id='right4status'></div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="left">
+        <div class="tile" id='left5status'></div>
+        <div class="tile" id='left5blank'> </div>
+      </div>
+      <div class="board">
+        <div class='tileboard' id='50'></div>
+        <div class='tileboard' id='51'></div>
+        <div class='tileboard' id='52'></div>
+        <div class='tileboard' id='53'></div>
+        <div class='tileboard' id='54'></div>
+        <div class='tileboard' id='55'></div>
+        <div class='tileboard' id='56'></div>
+      </div>
+      <div class="right">
+        <div class="tile" id='right5blank'> </div>
+        <div class="tile" id='right5status'></div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="left">
+        <div class="tile" id='left6status'></div>
+        <div class="tile" id='left6blank'> </div>
+      </div>
+      <div class="board">
+        <div class='tileboard' id='60'></div>
+        <div class='tileboard' id='61'></div>
+        <div class='tileboard' id='62'></div>
+        <div class='tileboard' id='63'></div>
+        <div class='tileboard' id='64'></div>
+        <div class='tileboard' id='65'></div>
+        <div class='tileboard' id='66'></div>
+      </div>
+      <div class="right">
+        <div class="tile" id='right6blank'> </div>
+        <div class="tile" id='right6status'></div>
+      </div>
+    </div>
+  </body>
+</html>
