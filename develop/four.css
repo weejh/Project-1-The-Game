@@ -10,15 +10,28 @@ body {
   flex-direction: row;
   justify-content: center;
 }
-.tile {
+.tilestatus {
   font-family: sans-serif;
   height: 50px;
-  width: 50px;
+  width: 100px;
   color: white;
   vertical-align: top;
   text-align: center;
   font-size: 10px;
   border: 1px solid red;
+  margin: 1px 1px 1px 1px;
+  padding: 0px 10px 0px 10px
+  border-radius: 5px;
+}
+.tileblank {
+  font-family: sans-serif;
+  height: 50px;
+  width: 10px;
+  color: white;
+  vertical-align: top;
+  text-align: center;
+  font-size: 10px;
+  border: 1px solid orange;
   margin: 1px 1px 1px 1px;
   border-radius: 5px;
 }
