@@ -1,16 +1,14 @@
 // var currentPlayer = 'one'
 var body = document.querySelector('body')
-var pastColumn = ''
-var currentColumn = ''
 // console.log(body)
 body.addEventListener('click', clickevent)
 body.addEventListener('mouseover', mouseoverevent)
 body.addEventListener('mouseout', mouseoutevent)
 
 function clickevent () {
-  console.log('clickevnet')
+  console.log('click event')
   var board = event.target
-  console.log(board)
+//  console.log(board)
 }
 function mouseoverevent () {
 //  console.log('mouseover')
@@ -19,28 +17,28 @@ function mouseoverevent () {
 //  console.log(board.className)
 //  console.log(board.id.charAt(board.id.length - 1))
 //  highlightColum (board.id.charAt(board.id.length - 1))
-//currentColumn = board.id
-//console.log('current : ' + board.id);
-highlightColumn (board.id, 'white')
+// currentColumn = board.id
+// console.log('current : ' + board.id);
+  highlightColumn(board.id, 'white')
 }
 
 function mouseoutevent () {
   var board = event.target
   if (board.className !== 'tileboard') return
 //  console.log('past : ' + board.id );
-  highlightColumn (board.id, 'black')
+  highlightColumn(board.id, 'black')
 }
+
 function highlightColumn (Col, Color) {
-   var colarray = ['chip', '0', '1', '2', '3', '4', '5', '6']
+  var colarray = ['chip', '0', '1', '2', '3', '4', '5', '6']
   // console.log(pastColumnelement);
   // pastColumnelement.style.backgroundColor='black'
-colarray.forEach( element  => {
-  //console.log(element + Col.charAt(Col.length-1))
-  Columnelement=document.getElementById(element + Col.charAt(Col.length-1))
-  // console.log(Columnelement)
-  Columnelement.style.backgroundColor=Color
 
-})
+  colarray.forEach(element => {
+  // console.log(element + Col.charAt(Col.length-1))
+    document.getElementById(element + Col.charAt(Col.length - 1)).style.backgroundColor = Color
+  // console.log(Columnelement)
+  })
 
 //   pastColumnelement = currentColumnelement || ''
 //   colarray.forEach ((Col) => {
