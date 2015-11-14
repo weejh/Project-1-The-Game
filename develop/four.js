@@ -19,7 +19,7 @@ function mouseoverevent () {
 //  highlightColum (board.id.charAt(board.id.length - 1))
 // currentColumn = board.id
 // console.log('current : ' + board.id);
-  highlightColumn(board.id, 'white')
+  highlightColumn(board.id, '#AAE9E5')
 }
 
 function mouseoutevent () {

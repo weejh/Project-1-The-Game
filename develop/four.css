@@ -48,6 +48,14 @@ body {
   border-radius: 25px;
 }
 
+.drop {
+
+  animation: bounce 1500ms infinite ;
+}
+
+.tileboard:hover{
+  cursor: pointer;
+}
 .tilechip {
   font-family: sans-serif;
   height: 50px;
@@ -60,6 +68,8 @@ body {
   margin: 1px 1px 1px 1px;
   border-radius: 5px;
 }
+
+
 #left {
   font-family: sans-serif;
   height: 50px;
@@ -71,4 +81,15 @@ body {
   border: 1px solid red;
   margin: 1px 1px 1px 1px;
   border-radius: 5px;
+}
+
+@keyframes drop {
+  0%, 100% {
+    bottom: 0;
+    animation-timing-function: ease-out;
+  }
+  50% {
+    bottom: 360px;
+    animation-timing-function: ease-in;
+  }
 }
