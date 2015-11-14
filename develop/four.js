@@ -1,5 +1,5 @@
 var currentPlayer = 'one'
-var body = document.querySelector('body')
+var body = document.querySelector('.body')
 console.log(board);
 board.addEventListener('click', event => {
   var board = event.target
