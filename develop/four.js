@@ -6,8 +6,11 @@ body.addEventListener('mouseover', mouseoverevent)
 body.addEventListener('mouseout', mouseoutevent)
 
 function clickevent () {
-  console.log('click event')
+//  console.log('click event')
   var board = event.target
+  if (board.className !== 'tileboard') return
+  DropChip(board.id)
+
 //  console.log(board)
 }
 function mouseoverevent () {
@@ -20,13 +23,15 @@ function mouseoverevent () {
 // currentColumn = board.id
 // console.log('current : ' + board.id);
   highlightColumn(board.id, '#AAE9E5')
+  DisplayChip(board.id, 'X')
 }
 
 function mouseoutevent () {
   var board = event.target
   if (board.className !== 'tileboard') return
 //  console.log('past : ' + board.id );
-  highlightColumn(board.id, 'black')
+  highlightColumn(board.id, 'green')
+  DisplayChip(board.id, 'chip')
 }
 
 function highlightColumn (Col, Color) {
@@ -36,7 +41,7 @@ function highlightColumn (Col, Color) {
 
   colarray.forEach(element => {
   // console.log(element + Col.charAt(Col.length-1))
-    document.getElementById(element + Col.charAt(Col.length - 1)).style.backgroundColor = Color
+    document.getElementById(element + Col.charAt(Col.length - 1)).style.borderColor = Color
   // console.log(Columnelement)
   })
 
@@ -44,6 +49,34 @@ function highlightColumn (Col, Color) {
 //   colarray.forEach ((Col) => {
 //     board.id
 //   })
+}
+
+function DisplayChip (Col, chip) {
+  document.getElementById('chip' + Col.charAt(Col.length - 1)).textContent = chip
+}
+
+function DropChip (Col) {
+  var colarray = ['chip', '0', '1', '2', '3', '4', '5', '6']
+//  var statusArray = Array.from(colarray, x => '')
+ var statusArray = ['A', 'A', 'A', '', '']
+
+/*  colarray.forEach((ele, index) => {
+    statusArray[index] = document.getElementsByName(ele + Col.charAt(Col.length - 1)).textContent
+  }) */
+
+/*  colarray.forEach(element => {
+  // console.log(element + Col.charAt(Col.length-1))
+    x = document.getElementById(element + Col.charAt(Col.length - 1))
+//    console.log('drop chip at ' + (element + Col.charAt(Col.length - 1)))
+    statusArray = x.textContent
+
+  //  .style.borderColor = Color
+//  console.log(element)
+  })*/
+
+ var index = statusArray.lastIndexOf('A')
+  console.log(statusArray, index)
+
 }
 /* event => {
   var tileboard = event.target
