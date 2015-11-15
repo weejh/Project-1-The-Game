@@ -23,7 +23,7 @@ function mouseoverevent () {
 // currentColumn = board.id
 // console.log('current : ' + board.id);
   highlightColumn(board.id, '#AAE9E5')
-  DisplayChip(board.id, 'X')
+  DisplayChip(board.id, 'CHIP')
 }
 
 function mouseoutevent () {
@@ -31,7 +31,7 @@ function mouseoutevent () {
   if (board.className !== 'tileboard') return
 //  console.log('past : ' + board.id );
   highlightColumn(board.id, 'green')
-  DisplayChip(board.id, 'chip')
+  DisplayChip(board.id, '')
 }
 
 function highlightColumn (Col, Color) {
