@@ -57,12 +57,13 @@ function DisplayChip (Col, chip) {
 
 function DropChip (Col) {
   var colarray = ['chip', '0', '1', '2', '3', '4', '5', '6']
-//  var statusArray = Array.from(colarray, x => '')
- var statusArray = ['A', 'A', 'A', '', '']
-
-/*  colarray.forEach((ele, index) => {
+  var statusArray = Array.from(colarray, x => '')
+ // var statusArray = ['A', 'A', 'A', '', '']
+//
+// read status
+  colarray.forEach((ele, index) => {
     statusArray[index] = document.getElementsByName(ele + Col.charAt(Col.length - 1)).textContent
-  }) */
+  })
 
 /*  colarray.forEach(element => {
   // console.log(element + Col.charAt(Col.length-1))
@@ -73,10 +74,8 @@ function DropChip (Col) {
   //  .style.borderColor = Color
 //  console.log(element)
   })*/
-
- var index = statusArray.lastIndexOf('A')
+  var index = statusArray.lastIndexOf('A')
   console.log(statusArray, index)
-
 }
 /* event => {
   var tileboard = event.target
