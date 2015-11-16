@@ -82,6 +82,17 @@ body {
   margin: 1px 1px 1px 1px;
   border-radius: 5px;
 }
+#chip0, #chip1, #chip2, #chip3, #chip4, #chip5, #chip6 {
+  ont-family: sans-serif;
+  height: 50px;
+  width: 50px;
+  color: white;
+  vertical-align: top;
+  text-align: center;
+  border: 1px solid blue;
+  margin: 1px 1px 1px 1px;
+  border-radius: 5px
+}
 
 @keyframes drop {
   0%, 100% {

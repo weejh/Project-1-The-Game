@@ -26,6 +26,8 @@ function mouseoverevent () {
 // console.log('current : ' + board.id);
   highlightColumn(board.id, '#AAE9E5')
   DisplayChip(board.id, 'CHIP')
+  document.getElementById('chip' + board.id.charAt(board.id.length - 1)).style.borderColor = '#AAE9E5'
+
 }
 
 function mouseoutevent () {
@@ -34,10 +36,12 @@ function mouseoutevent () {
 //  console.log('past : ' + board.id );
   highlightColumn(board.id, 'green')
   DisplayChip(board.id, '')
+  document.getElementById('chip' + board.id.charAt(board.id.length - 1)).style.borderColor = 'blue'
+
 }
 
 function highlightColumn (Col, Color) {
-  var colarray = ['chip', '0', '1', '2', '3', '4', '5', '6']
+  var colarray = ['0', '1', '2', '3', '4', '5', '6']
   // console.log(pastColumnelement);
   // pastColumnelement.style.backgroundColor='black'
 
