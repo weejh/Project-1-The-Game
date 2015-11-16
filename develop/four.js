@@ -1,5 +1,7 @@
-// var currentPlayer = 'one'
+var currentPlayer = 'one'
 var body = document.querySelector('body')
+var statusBoard = {}
+var statusArray = Array.of(7)
 // console.log(body)
 body.addEventListener('click', clickevent)
 body.addEventListener('mouseover', mouseoverevent)
@@ -56,26 +58,61 @@ function DisplayChip (Col, chip) {
 }
 
 function DropChip (Col) {
-  var colarray = ['chip', '0', '1', '2', '3', '4', '5', '6']
-  var statusArray = Array.from(colarray, x => '')
- // var statusArray = ['A', 'A', 'A', '', '']
+  var colarray = ['0', '1', '2', '3', '4', '5', '6']
 //
-// read status
-  colarray.forEach((ele, index) => {
-    statusArray[index] = document.getElementsByName(ele + Col.charAt(Col.length - 1)).textContent
+  colarray.forEach ((element, index) => {
+    statusArray[index] = document.getElementById(element + Col.charAt(Col.length - 1)).textContent
   })
+//console.log('stats array : '+statusArray);
+//console.log('player : ' + currentPlayer);
+//console.log(statusArray.lastIndexOf('one')+'  '+statusArray.lastIndexOf('two'))
+//
+//
+  if (statusArray.lastIndexOf('one') && statusArray.lastIndexOf('two')) updateStat(currentPlayer, -1, Col)
+  if (statusArray.lastIndexOf('one') > statusArray.lastIndexOf('two')) updateStat(currentPlayer, statusArray.lastIndexOf('one'), Col)
+  if (statusArray.lastIndexOf('one') < statusArray.lastIndexOf('two')) updateStat(currentPlayer, statusArray.lastIndexOf('two'), Col)
+//
+//
+  /*if (statusArray.lastIndexOf('one') < statusArray.lastIndexOf('two')) {
+    console.log('one > two');
+    statusArray[statusArray.lastIndexOf('one')] = 'one'
+    document.getElementById((statusArray.lastIndexOf('one') + 1).toString(10) + Col.charAt(Col.length - 1)).textContent = 'one'
+    statusBoard[(statusArray.lastIndexOf('one')+ 1).toString(10) + Col.charAt(Col.length - 1)] = currentPlayer
+  }
 
-/*  colarray.forEach(element => {
-  // console.log(element + Col.charAt(Col.length-1))
-    x = document.getElementById(element + Col.charAt(Col.length - 1))
-//    console.log('drop chip at ' + (element + Col.charAt(Col.length - 1)))
-    statusArray = x.textContent
+  if (statusArray.lastIndexOf('one') > statusArray.lastIndexOf('two')) {
+    console.log('one < two');
+    statusArray[statusArray.lastIndexOf('two')] = 'two'
+    document.getElementById((statusArray.lastIndexOf('two') +1 ).toString(10) + Col.charAt(Col.length - 1)).textContent = 'two'
+    statusBoard[(statusArray.lastIndexOf('two') + 1).toString(10) + Col.charAt(Col.length - 1)] = currentPlayer
+  }*/
+  //
+  //
+  //
+  //
+  currentPlayer === 'one' ? currentPlayer = 'two' : currentPlayer = 'one'
+  console.log(statusBoard)
+// console.log('next player : ' + currentPlayer)
+}
 
-  //  .style.borderColor = Color
-//  console.log(element)
-  })*/
-  var index = statusArray.lastIndexOf('A')
-  console.log(statusArray, index)
+function updateStat (player, row, column) {
+  statusArray[row] = player
+//  console.log('in updateStat, row: ' + row )
+//  console.log('in updateStat, column: ' + column)
+  document.getElementById((row + 1).toString(10) + column.charAt(column.length - 1)).textContent = player
+  statusBoard[(row + 1).toString(10) + column.charAt(column.length - 1)] = player
+}
+  /* else {
+    statusArray[0] = 'A'
+    document.getElementById('0' + Col.charAt(Col.length - 1)).textContent = 'A'
+    var update = ('0' + Col.charAt(Col.length - 1))
+    statusBoard[update] = currentPlayer
+//    console.log('in 0 ', document.getElementById('0' + Col.charAt(Col.length - 1)).textContent)
+  }
+  colarray.forEach(x => {
+    console.log(document.getElementById(x + Col.charAt(Col.length - 1)).textContent)
+    console.log(statusBoard)
+  })
 }
 /* event => {
   var tileboard = event.target
