@@ -27,17 +27,15 @@ function mouseoverevent () {
   highlightColumn(board.id, '#AAE9E5')
   DisplayChip(board.id, 'CHIP')
   document.getElementById('chip' + board.id.charAt(board.id.length - 1)).style.borderColor = '#AAE9E5'
-
 }
 
 function mouseoutevent () {
-  var board = event.target
-  if (board.className !== 'tileboard') return
+//  var board = event.target
+  if (event.target.className !== 'tileboard') return
 //  console.log('past : ' + board.id );
-  highlightColumn(board.id, 'green')
-  DisplayChip(board.id, '')
-  document.getElementById('chip' + board.id.charAt(board.id.length - 1)).style.borderColor = 'blue'
-
+  highlightColumn(event.target.id, 'green')
+  DisplayChip(event.target.id, '')
+  document.getElementById('chip' + event.target.id.charAt(event.target.id.length - 1)).style.borderColor = 'blue'
 }
 
 function highlightColumn (Col, Color) {
