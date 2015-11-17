@@ -18,8 +18,8 @@ body {
   vertical-align: top;
   text-align: center;
   font-size: 10px;
-  border: 1px solid red;
-  margin: 1px 1px 1px 1px;
+  border-left: 1px solid red;
+  border-right: 1px solid red;
   padding: 0px 10px 0px 10px
   border-radius: 5px;
 }
@@ -31,8 +31,7 @@ body {
   vertical-align: top;
   text-align: center;
   font-size: 10px;
-  border: 1px solid orange;
-  margin: 1px 1px 1px 1px;
+  border: 1px solid black;
   border-radius: 5px;
 }
 .tileboard {
@@ -44,7 +43,6 @@ body {
   text-align: center;
   font-size: 10px;
   border: 1px solid green;
-  margin: 1px 1px 1px 1px;
   border-radius: 1px;
 }
 
@@ -65,11 +63,15 @@ body {
   text-align: center;
   font-size: 10px;
   border: 1px solid blue;
-  margin: 1px 1px 1px 1px;
   border-radius: 5px;
 }
 
-
+#lefttopstatus, #righttopblank1 {
+  border-top: 1px solid red;
+}
+#left0status, #right0status {
+  border-bottom: 1px solid red;
+}
 #left {
   font-family: sans-serif;
   height: 50px;
@@ -79,18 +81,16 @@ body {
   text-align: center;
   font-size: 30px;
   border: 1px solid red;
-  margin: 1px 1px 1px 1px;
   border-radius: 5px;
 }
 #chip0, #chip1, #chip2, #chip3, #chip4, #chip5, #chip6 {
-  ont-family: sans-serif;
+  font-family: sans-serif;
   height: 50px;
   width: 50px;
   color: white;
   vertical-align: top;
   text-align: center;
   border: 1px solid blue;
-  margin: 1px 1px 1px 1px;
   border-radius: 5px
 }
 
