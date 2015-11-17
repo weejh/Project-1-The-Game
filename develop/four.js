@@ -55,6 +55,7 @@ function DropChip (Col) {
   currentPlayer === 'one' ? currentPlayer = 'two' : currentPlayer = 'one'
   document.getElementById('left4status').textContent = 'Player ' + currentPlayer.charAt(0).toUpperCase() + currentPlayer.slice(1)
   console.log(statusBoard)
+  // to check for winner
 }
 
 function updateStat (player, row, column) {
