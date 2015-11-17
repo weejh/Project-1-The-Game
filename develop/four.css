@@ -68,9 +68,11 @@ body {
 
 #lefttopstatus, #righttopblank1 {
   border-top: 1px solid red;
+  border-radius: 5px;
 }
 #left0status, #right0status {
   border-bottom: 1px solid red;
+  border-radius: 5px;
 }
 #left {
   font-family: sans-serif;
