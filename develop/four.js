@@ -16,7 +16,7 @@ function mouseoverevent () {
   var board = event.target
   if (board.className !== 'tileboard') return
   highlightColumn(board.id, '#AAE9E5')
-  DisplayChip(board.id, 'CHIP')
+  DisplayChip(board.id, currentPlayer)
   document.getElementById('chip' + board.id.charAt(board.id.length - 1)).style.borderColor = '#AAE9E5'
 }
 
@@ -40,16 +40,18 @@ function DisplayChip (Col, chip) {
 
 function DropChip (Col) {
   var colarray = ['0', '1', '2', '3', '4', '5', '6']
+  //
+  // read the status
   colarray.forEach ((element, index) => {
     statusArray[index] = document.getElementById(element + Col.charAt(Col.length - 1)).textContent
   })
 //
-//
+// update the status array
   if (statusArray.lastIndexOf('one') && statusArray.lastIndexOf('two')) updateStat(currentPlayer, -1, Col)
   if (statusArray.lastIndexOf('one') > statusArray.lastIndexOf('two')) updateStat(currentPlayer, statusArray.lastIndexOf('one'), Col)
   if (statusArray.lastIndexOf('one') < statusArray.lastIndexOf('two')) updateStat(currentPlayer, statusArray.lastIndexOf('two'), Col)
 //
-//
+// next player
   currentPlayer === 'one' ? currentPlayer = 'two' : currentPlayer = 'one'
   document.getElementById('left4status').textContent = 'Player ' + currentPlayer.charAt(0).toUpperCase() + currentPlayer.slice(1)
   console.log(statusBoard)
