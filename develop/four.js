@@ -2,114 +2,121 @@
 var currentPlayer = 'one'
 var body = document.querySelector('body')
 var statusBoard = {}
-var statusArray = Array.of(7)
+var statusArray = []
 body.addEventListener('click', clickevent)
 body.addEventListener('mouseover', mouseoverevent)
 body.addEventListener('mouseout', mouseoutevent)
 
-function clickevent () {
+function clickevent (event) {
   var board = event.target
   if (board.className !== 'tileboard') return
   if (board.id === 'reset') document.location.reload(true)
-  else DropChip(board.id)
+  else dropChip(board.id)
 }
 
-function mouseoverevent () {
+function mouseoverevent (event) {
   var board = event.target
   if (board.className !== 'tileboard') return
   if (board.id === 'reset') return
   highlightColumn(board.id, '#AAE9E5')
-  DisplayChip(board.id, currentPlayer)
-  document.getElementById('chip' + board.id.charAt(board.id.length - 1)).style.borderColor = '#AAE9E5'
+  displayChip(board.id, currentPlayer)
+  var chipLocation = 'chip' + board.id.charAt(board.id.length - 1)
+  document.getElementById(chipLocation).style.borderColor = '#AAE9E5'
 }
 
-function mouseoutevent () {
-  if (event.target.className !== 'tileboard') return
-  if (event.target.id === 'reset') return
-  highlightColumn(event.target.id, 'green')
-  DisplayChip(event.target.id, '')
-  document.getElementById('chip' + event.target.id.charAt(event.target.id.length - 1)).style.borderColor = 'blue'
+function mouseoutevent (event) {
+  var board = event.target
+  if (board.className !== 'tileboard') return
+  if (board.id === 'reset') return
+  highlightColumn(board.id, 'green')
+  displayChip(board.id, '')
+  var chipLocation = 'chip' + board.id.charAt(board.id.length - 1)
+  document.getElementById(chipLocation).style.borderColor = 'blue'
 }
 
-function highlightColumn (Col, Color) {
+function highlightColumn (column, Color) {
   var colarray = ['0', '1', '2', '3', '4', '5', '6']
   colarray.forEach(element => {
-    document.getElementById(element + Col.charAt(Col.length - 1)).style.borderColor = Color
+    var cellLocation = element + column.charAt(column.length - 1)
+    document.getElementById(cellLocation).style.borderColor = Color
   })
 }
 
-function DisplayChip (Col, chip) {
-  document.getElementById('chip' + Col.charAt(Col.length - 1)).textContent = chip
+function displayChip (column, chip) {
+  var chipLocation = 'chip' + column.charAt(column.length - 1)
+  document.getElementById(chipLocation).textContent = chip
 }
 
-function DropChip (Col) {
-  var colarray = ['0', '1', '2', '3', '4', '5', '6']
+function dropChip (column) {
+  var columnArray = ['0', '1', '2', '3', '4', '5', '6']
   //
-  // read the status
-  colarray.forEach ((element, index) => {
-    statusArray[index] = document.getElementById(element + Col.charAt(Col.length - 1)).textContent
+  // read the status from the board
+  columnArray.forEach((element, index) => {
+    var cellLocation = element + column.charAt(column.length - 1)
+    statusArray[index] = document.getElementById(cellLocation).textContent
   })
 //
 // update the status array
-  if (statusArray.lastIndexOf('one') && statusArray.lastIndexOf('two')) updateStat(currentPlayer, -1, Col)
-  if (statusArray.lastIndexOf('one') > statusArray.lastIndexOf('two')) updateStat(currentPlayer, statusArray.lastIndexOf('one'), Col)
-  if (statusArray.lastIndexOf('one') < statusArray.lastIndexOf('two')) updateStat(currentPlayer, statusArray.lastIndexOf('two'), Col)
-//
-// to check for winner
-  //  checkWinner ((statusArray.lastIndexOf(currentPlayer) + 1).toString(10) + Col.charAt(Col.length - 1), currentPlayer)
-  // checkWinner ((statusArray.lastIndexOf(currentPlayer) + 1).toString(10) + Col.charAt(Col.length - 1), statusBoard, currentPlayer)
-  if (checkWinner ((statusArray.lastIndexOf(currentPlayer) + 1).toString(10) + Col.charAt(Col.length - 1), currentPlayer)) {
+  var oneLocation = statusArray.lastIndexOf('one')
+  var twoLocation = statusArray.lastIndexOf('two')
+  if (oneLocation && twoLocation) updateStat(currentPlayer, -1, column)
+  if (oneLocation > twoLocation) updateStat(currentPlayer, oneLocation, column)
+  if (oneLocation < twoLocation) updateStat(currentPlayer, twoLocation, column)
+  //
+  // current player location
+  var currentPlayerlocation = (statusArray.lastIndexOf(currentPlayer) + 1).toString(10) + column.charAt(column.length - 1)
+  // check for winner
+  if (checkWinner(currentPlayerlocation, currentPlayer)) {
+    //
+    // update wining status
     document.getElementById('left4status').textContent = 'Player ' + currentPlayer.charAt(0).toUpperCase() + currentPlayer.slice(1) + ' wins'
     body.removeEventListener('click', clickevent)
     body.removeEventListener('mouseover', mouseoverevent)
     body.removeEventListener('mouseout', mouseoutevent)
   } else {
-// next player
+    // next player
     currentPlayer === 'one' ? currentPlayer = 'two' : currentPlayer = 'one'
     document.getElementById('left4status').textContent = 'Player ' + currentPlayer.charAt(0).toUpperCase() + currentPlayer.slice(1)
-  }// document.getElementById('left4status').style.co
+  }
 }
 
 function updateStat (player, row, column) {
   statusArray[row] = player
-  document.getElementById((row + 1).toString(10) + column.charAt(column.length - 1)).textContent = player
-  statusBoard[(row + 1).toString(10) + column.charAt(column.length - 1)] = player
+  // location of last cell
+  var cellLocation = (row + 1).toString(10) + column.charAt(column.length - 1)
+  document.getElementById(cellLocation).textContent = player
+  statusBoard[cellLocation] = player
 }
 
-function checkWinner (Col, player) {
+function checkWinner (column, player) {
   // always check for next 3 location in all direction
-  var rowgiven = parseInt(Col.charAt(Col.length - 1), 10)
-  var colgiven = parseInt(Col.charAt(Col.length - Col.length), 10)
-  var indexarray = [-1, 0, 1]
-  var arrayprocess = Array.of(3)
-  var arraycoordinate = Array.of(3)
-  var Astatus = []
-  var winner = '0'
-  console.log('in check winner, location: ' + colgiven + rowgiven + ' | player : ' + player)
-  console.log(statusBoard)
-  indexarray.forEach(rowIndex => {
-    indexarray.forEach(columnIndex => {
-      [1, 2, 3].forEach((element, elementIndex) => {
-        arraycoordinate[elementIndex] = (((columnIndex * element) + colgiven).toString(10) + ((rowIndex * element) + rowgiven).toString(10))
-        arrayprocess[elementIndex] = statusBoard[((columnIndex * element) + colgiven).toString(10) + ((rowIndex * element) + rowgiven).toString(10)]
-      })
-     console.log('player:' + player + ' | loc : '+ arraycoordinate + ' | arrayprocess : ' + arrayprocess )
-      Astatus.push(arraycoordinate.every(cord => cord !== Col) && arrayprocess.every(ele => ele === player))
-      arraycoordinate = Array.of(3)
-    })
-  })
-  indexarray.forEach(rowIndex => {
-    indexarray.forEach(columnIndex => {
-      [-1, 1, 2].forEach((element, elementIndex) => {
-        arraycoordinate[elementIndex] = (((columnIndex * element) + colgiven).toString(10) + ((rowIndex * element) + rowgiven).toString(10))
-        arrayprocess[elementIndex] = statusBoard[((columnIndex * element) + colgiven).toString(10) + ((rowIndex * element) + rowgiven).toString(10)]
-      })
-     console.log('player:' + player + ' | loc : '+ arraycoordinate + ' | arrayprocess : ' + arrayprocess )
-      Astatus.push(arraycoordinate.every(cord => cord !== Col) && arrayprocess.every(ele => ele === player))
-      arraycoordinate = Array.of(3)
-    })
-  })
-  console.log('player ' + player + ' win is '+ Astatus.some(e => e === true))
-  return Astatus.some(e => e === true)
+  var rowGiven = parseInt(column.charAt(column.length - 1), 10)
+  var colGiven = parseInt(column.charAt(column.length - column.length), 10)
+  var indexArray = [-1, 0, 1]
+  var arrayProcess = []
+  var arrayCoordinate = []
+  var aStatus = []
+//  console.log('in check winner, location: ' + colGiven + rowGiven + ' | player : ' + player)
+//  console.log(statusBoard)
+  computeStatus([1, 2, 3])
+  computeStatus([-1, 1, 2])
+  // console.log('player ' + player + ' win is '+ Astatus.some(e => e === true))
+  // return status
+  return aStatus.some(e => e === true)
 
+  function computeStatus (elementRequired) {
+    indexArray.forEach(rowIndex => {
+      indexArray.forEach(columnIndex => {
+        elementRequired.forEach((element, elementIndex) => {
+          var column = ((columnIndex * element) + colGiven).toString(10)
+          var row = ((rowIndex * element) + rowGiven).toString(10)
+          arrayCoordinate[elementIndex] = (column + row)
+          arrayProcess[elementIndex] = statusBoard[column + row]
+        })
+      // console.log('player:' + player + ' | loc : '+ arraycoordinate + ' | arrayprocess : ' + arrayprocess )
+        aStatus.push(arrayCoordinate.every(cord => cord !== column) && arrayProcess.every(ele => ele === player))
+        arrayCoordinate = []
+      })
+    })
+  }
 }
