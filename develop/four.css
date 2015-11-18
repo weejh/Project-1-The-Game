@@ -68,10 +68,14 @@ body {
 }
 
 #lefttopstatus, #righttopblank1 {
-  border-top: 1px solid red;
+  border: 1px solid black;
   border-radius: 5px;
 }
 
+#left6status, #right6status {
+  border-top: 1px solid red;
+  border-radius: 5px;
+}
 #left0status, #right0status {
   border-bottom: 1px solid red;
   border-radius: 5px;
@@ -90,7 +94,7 @@ body {
 }
 
 #chip0, #chip1, #chip2, #chip3, #chip4, #chip5, #chip6 {
-  border: 1px solid blue;
+  border: 1px solid black;
   border-radius: 5px
 }
 #reset {
