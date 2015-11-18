@@ -3,6 +3,8 @@ var currentPlayer = 'one'
 var body = document.querySelector('body')
 var statusBoard = {}
 var statusArray = []
+var completedColumn = []
+var winner4 = ''
 body.addEventListener('click', clickevent)
 body.addEventListener('mouseover', mouseoverevent)
 body.addEventListener('mouseout', mouseoutevent)
@@ -65,8 +67,10 @@ function dropChip (column) {
     if (oneLocation && twoLocation) updateStat(currentPlayer, -1, column)
     if ((oneLocation > twoLocation)) updateStat(currentPlayer, oneLocation, column)
     if ((oneLocation < twoLocation)) updateStat(currentPlayer, twoLocation, column)
-  }
+  } else completedColumn.find(ele => ele === column) ? column : completedColumn.push(column)
   //
+  console.log('completedColumn: ' + completedColumn);
+  console.log(statusBoard);
   // current player location
   var currentPlayerlocation = (statusArray.lastIndexOf(currentPlayer) + 1).toString(10) + column.charAt(column.length - 1)
   // console.log(currentPlayerlocation)
@@ -138,9 +142,38 @@ function checkWinner (column, player) {
           arrayProcess[elementIndex] = statusBoard[column + row]
         })
       // console.log('player:' + player + ' | loc : '+ arraycoordinate + ' | arrayprocess : ' + arrayprocess )
-        aStatus.push(arrayCoordinate.every(cord => cord !== column) && arrayProcess.every(ele => ele === player))
+        winner4 = (arrayCoordinate.every(cord => cord !== column) && arrayProcess.every(ele => ele === player))
+        if (winner4) highLightwinner(arrayCoordinate, column)
+        aStatus.push(winner4)
         arrayCoordinate = []
       })
     })
   }
+}
+function highLightwinner (winnerCoordinate, winner) {
+  winnerCoordinate.push(winner)
+  highlightColumn(winner, 'green')
+  displayChip(winner, '')
+  resetCursor()
+  document.getElementById('reset').style.cursor = 'pointer'
+  var chipLocation = 'chip' + winner.charAt(winner.length - 1)
+  document.getElementById(chipLocation).style.borderColor = 'black'
+  winnerCoordinate.forEach(ele => {
+    var d = document.getElementById(ele)
+    d.style.color = 'white'
+    d.style.backgroundColor = 'blue'
+    d.style.borderColor = 'red'
+  })
+}
+
+function resetCursor () {
+  var eleA = ['chip', '0', '1', '2', '3', '4', '5', '6']
+  var eleB = ['0', '1', '2', '3', '4', '5', '6']
+  eleA.forEach(ele1 => {
+    eleB.forEach(ele2 => {
+      var pp = ele1 + ele2
+      var p = document.getElementById(pp)
+      p.style.cursor = 'default'
+    })
+  })
 }
