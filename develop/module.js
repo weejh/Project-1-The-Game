@@ -1,4 +1,4 @@
-export function checkWinner (givenLoc, statusBoard, currentPlayer) {
+export  function checkWinner (givenLoc, statusBoard, currentPlayer) {
   // var given = '01'
   var arrayobj = {}
   var arrayprocess = Array.of(3)
@@ -49,6 +49,7 @@ export function checkWinner (givenLoc, statusBoard, currentPlayer) {
 
       if (arrayprocess.every(ele => ele === 'one')) Astatus.push('matched')
         console.log(Astatus)
+        return Astatus
       arrayprocess = Array.of(3)
     //  console.log('after clear arrayprocess : ' + arrayprocess);
     })

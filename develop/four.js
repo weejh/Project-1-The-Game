@@ -1,4 +1,4 @@
-//import { checkWinner (givenLoc, statusBoard, currentPlayer) }from 'module.js'
+// import { checkWinner } from './module.js'
 var currentPlayer = 'one'
 var body = document.querySelector('body')
 var statusBoard = {}
@@ -10,12 +10,14 @@ body.addEventListener('mouseout', mouseoutevent)
 function clickevent () {
   var board = event.target
   if (board.className !== 'tileboard') return
-  DropChip(board.id)
+  if (board.id === 'reset') document.location.reload(true)
+  else DropChip(board.id)
 }
 
 function mouseoverevent () {
   var board = event.target
   if (board.className !== 'tileboard') return
+  if (board.id === 'reset') return
   highlightColumn(board.id, '#AAE9E5')
   DisplayChip(board.id, currentPlayer)
   document.getElementById('chip' + board.id.charAt(board.id.length - 1)).style.borderColor = '#AAE9E5'
@@ -23,6 +25,7 @@ function mouseoverevent () {
 
 function mouseoutevent () {
   if (event.target.className !== 'tileboard') return
+  if (event.target.id === 'reset') return
   highlightColumn(event.target.id, 'green')
   DisplayChip(event.target.id, '')
   document.getElementById('chip' + event.target.id.charAt(event.target.id.length - 1)).style.borderColor = 'blue'
@@ -52,18 +55,19 @@ function DropChip (Col) {
   if (statusArray.lastIndexOf('one') > statusArray.lastIndexOf('two')) updateStat(currentPlayer, statusArray.lastIndexOf('one'), Col)
   if (statusArray.lastIndexOf('one') < statusArray.lastIndexOf('two')) updateStat(currentPlayer, statusArray.lastIndexOf('two'), Col)
 //
+// to check for winner
+  //  checkWinner ((statusArray.lastIndexOf(currentPlayer) + 1).toString(10) + Col.charAt(Col.length - 1), currentPlayer)
+  // checkWinner ((statusArray.lastIndexOf(currentPlayer) + 1).toString(10) + Col.charAt(Col.length - 1), statusBoard, currentPlayer)
+  if (checkWinner ((statusArray.lastIndexOf(currentPlayer) + 1).toString(10) + Col.charAt(Col.length - 1), currentPlayer)) {
+    document.getElementById('left4status').textContent = 'Player ' + currentPlayer.charAt(0).toUpperCase() + currentPlayer.slice(1) + ' wins'
+    body.removeEventListener('click', clickevent)
+    body.removeEventListener('mouseover', mouseoverevent)
+    body.removeEventListener('mouseout', mouseoutevent)
+  } else {
 // next player
-//  console.log(statusBoard)
-//console.log('current player : ' + currentPlayer + ' | location :' + (statusArray.lastIndexOf(currentPlayer) + 1).toString(10) + Col.charAt(Col.length - 1))
-  // to check for winner
-//  console.log(checkWinner ((statusArray.lastIndexOf(currentPlayer) + 1).toString(10) + Col.charAt(Col.length - 1), currentPlayer))
-//console.log(statusBoard);
-checkWinner ((statusArray.lastIndexOf(currentPlayer) + 1).toString(10) + Col.charAt(Col.length - 1), currentPlayer)
-
-currentPlayer === 'one' ? currentPlayer = 'two' : currentPlayer = 'one'
-document.getElementById('left4status').textContent = 'Player ' + currentPlayer.charAt(0).toUpperCase() + currentPlayer.slice(1)
-//document.getElementById('left4status').style.co
-
+    currentPlayer === 'one' ? currentPlayer = 'two' : currentPlayer = 'one'
+    document.getElementById('left4status').textContent = 'Player ' + currentPlayer.charAt(0).toUpperCase() + currentPlayer.slice(1)
+  }// document.getElementById('left4status').style.co
 }
 
 function updateStat (player, row, column) {
@@ -94,5 +98,18 @@ function checkWinner (Col, player) {
       arraycoordinate = Array.of(3)
     })
   })
-  console.log(Astatus)
+  indexarray.forEach(rowIndex => {
+    indexarray.forEach(columnIndex => {
+      [-1, 1, 2].forEach((element, elementIndex) => {
+        arraycoordinate[elementIndex] = (((columnIndex * element) + colgiven).toString(10) + ((rowIndex * element) + rowgiven).toString(10))
+        arrayprocess[elementIndex] = statusBoard[((columnIndex * element) + colgiven).toString(10) + ((rowIndex * element) + rowgiven).toString(10)]
+      })
+     console.log('player:' + player + ' | loc : '+ arraycoordinate + ' | arrayprocess : ' + arrayprocess )
+      Astatus.push(arraycoordinate.every(cord => cord !== Col) && arrayprocess.every(ele => ele === player))
+      arraycoordinate = Array.of(3)
+    })
+  })
+  console.log('player ' + player + ' win is '+ Astatus.some(e => e === true))
+  return Astatus.some(e => e === true)
+
 }

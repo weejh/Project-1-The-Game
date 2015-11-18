@@ -98,6 +98,17 @@ body {
   border: 1px solid blue;
   border-radius: 5px
 }
+#reset {
+  font-family: sans-serif;
+  height: 50px;
+  width: 350px;
+  color: white;
+  vertical-align: top;
+  text-align: center;
+  margin: 10px;
+  border: 1px solid yellow;
+  border-radius: 10px
+}
 
 @keyframes drop {
   0%, 100% {
