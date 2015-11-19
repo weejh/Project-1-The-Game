@@ -1,4 +1,4 @@
-export  function checkWinner (givenLoc, statusBoard, currentPlayer) {
+export function checkWinner (givenLoc, statusBoard, currentPlayer) {
   // var given = '01'
   var arrayobj = {}
   var arrayprocess = Array.of(3)
@@ -22,15 +22,15 @@ export  function checkWinner (givenLoc, statusBoard, currentPlayer) {
   //
   indexarray.forEach(rowIndex => {
     indexarray.forEach(columnIndex => {
-      [1,2,3].forEach((element, elementIndex) => {
+      [1, 2, 3].forEach((element, elementIndex) => {
         // arrayprocess[elementIndex] = (columnIndex*element).toString(10) + (rowIndex*element).toString(10)
         // if ((columnIndex != 0) && (rowIndex !=0)) {
         if ((columnIndex.toString(10) + rowIndex.toString(10)) !== '00') {
         //  arrayprocess[elementIndex] = (columnIndex*element).toString(10) + (rowIndex*element).toString(10)
-                    arrayprocess[elementIndex] = statusBoard[((rowIndex * element) + colgiven).toString(10) + ((columnIndex * element) + rowgiven).toString(10)]
+          arrayprocess[elementIndex] = statusBoard[((rowIndex * element) + colgiven).toString(10) + ((columnIndex * element) + rowgiven).toString(10)]
       //  console.log(typeof(arrayprocess[elementIndex]));
-         console.log('col : ' + (columnIndex * element) + ' | row : ' + (rowIndex * element) + ' | arrayprocess ' + arrayprocess)
-      }
+          console.log('col : ' + (columnIndex * element) + ' | row : ' + (rowIndex * element) + ' | arrayprocess ' + arrayprocess)
+        }
 
         //  if (element === 3)
       //    console.log('arrayprocess : ' + arrayprocess)
@@ -48,9 +48,9 @@ export  function checkWinner (givenLoc, statusBoard, currentPlayer) {
   //    if (arrayprocess.every( ele => ele === 'one') ) console.log('matched' + ' | arrayprocess : ' + arrayprocess );
 
       if (arrayprocess.every(ele => ele === 'one')) Astatus.push('matched')
-        console.log(Astatus)
-        return Astatus
-      arrayprocess = Array.of(3)
+      console.log(Astatus)
+      return Astatus
+    //  arrayprocess = Array.of(3)
     //  console.log('after clear arrayprocess : ' + arrayprocess);
     })
   })
