@@ -62,7 +62,7 @@ function dropChip (column) {
   var oneLocation = statusArray.lastIndexOf('one')
   var twoLocation = statusArray.lastIndexOf('two')
 //  console.log('oneLocation: ' + oneLocation + ' | twoLocation: ' + twoLocation)
- console.log('statusArray: '+ statusArray + ' | ' + statusArray.indexOf(''))
+  console.log('statusArray: ' + statusArray + ' | ' + statusArray.indexOf(''))
   if ((statusArray.indexOf('') < 7) && statusArray.indexOf('') > -1) {
     if (oneLocation && twoLocation) updateStat(currentPlayer, -1, column)
     if ((oneLocation > twoLocation)) updateStat(currentPlayer, oneLocation, column)
@@ -70,8 +70,8 @@ function dropChip (column) {
   } else completedColumn.find(ele => ele === column) ? column : completedColumn.push(column)
   //
 
-  console.log('completedColumn: ' + completedColumn);
-  console.log(statusBoard);
+  console.log('completedColumn: ' + completedColumn)
+  console.log(statusBoard)
   // current player location
   var currentPlayerlocation = (statusArray.lastIndexOf(currentPlayer) + 1).toString(10) + column.charAt(column.length - 1)
   // console.log(currentPlayerlocation)
@@ -95,13 +95,13 @@ function dropChip (column) {
   }
 }
 
-function moveChip (sourceLocation) {
-  var colGiven = parseInt(sourceLocation.charAt(sourceLocation.length - 1), 10)
-  var rowGiven = parseInt(sourceLocation.charAt(sourceLocation.length - sourceLocation.length), 10)
+// function moveChip (sourceLocation) {
+//  var colGiven = parseInt(sourceLocation.charAt(sourceLocation.length - 1), 10)
+//  var rowGiven = parseInt(sourceLocation.charAt(sourceLocation.length - sourceLocation.length), 10)
 //  console.log('row : ' + rowGiven + ' | col: ' + colGiven)
 //  var column = ['6', '5', '4', '3', '2', '1', '0'].slice(0, 8 - rowGiven)
 //  console.log(column);
-}
+// }
 function updateStat (player, row, column) {
   statusArray[row] = player
   console.log(' in func  row: ' + (row + 1))
