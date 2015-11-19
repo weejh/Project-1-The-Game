@@ -10,6 +10,7 @@ body {
   flex-direction: row;
   justify-content: center;
 }
+
 .tilestatus {
   font-family: sans-serif;
   height: 50px;
@@ -36,37 +37,32 @@ body {
 }
 .tileboard {
   font-family: sans-serif;
-  height: 50px;
+  height: 30px;
   width: 50px;
   color: white;
-  vertical-align: top;
+  vertical-align: center;
   text-align: center;
   font-size: 10px;
   border: 1px solid green;
   border-radius: 1px;
+  padding-top: 20px;
 }
 
 .drop {
-
   animation: bounce 1500ms infinite ;
 }
 
 .tileboard:hover{
   cursor: pointer;
 }
-.tilechip {
-  font-family: sans-serif;
-  height: 50px;
-  width: 50px;
-  color: white;
-  vertical-align: top;
-  text-align: center;
-  font-size: 10px;
-  border: 1px solid blue;
+
+
+#lefttopstatus, #righttopblank1 {
+  border: 1px solid black;
   border-radius: 5px;
 }
 
-#lefttopstatus, #righttopblank1 {
+#left6status, #right6status {
   border-top: 1px solid red;
   border-radius: 5px;
 }
@@ -74,6 +70,7 @@ body {
   border-bottom: 1px solid red;
   border-radius: 5px;
 }
+
 #left {
   font-family: sans-serif;
   height: 50px;
@@ -85,15 +82,22 @@ body {
   border: 1px solid red;
   border-radius: 5px;
 }
+
 #chip0, #chip1, #chip2, #chip3, #chip4, #chip5, #chip6 {
-  font-family: sans-serif;
-  height: 50px;
-  width: 50px;
-  color: white;
-  vertical-align: top;
-  text-align: center;
-  border: 1px solid blue;
+  border: 1px solid black;
   border-radius: 5px
+}
+#reset {
+  font-family: sans-serif;
+  height: 20px;
+  width: 350px;
+  color: white;
+  vertical-align: center;
+  text-align: center;
+  padding-top: 7px;
+  margin: 10px;
+  border: 1px solid yellow;
+  border-radius: 10px
 }
 
 @keyframes drop {
