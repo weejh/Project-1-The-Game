@@ -12,6 +12,7 @@
     "http-server": "^0.8.5",
     "mocha": "^2.3.4",
     "standard": "^5.3.1",
+    "watch": "^0.16.0",
     "watch-spawn": "^1.0.6",
     "watchify": "^3.6.0"
   },
@@ -24,7 +25,7 @@
     "build": "npm run clean && mkdir dist && npm run build-html && npm run build-css && npm run build-js",
     "build-html": "cp develop/index.html dist",
     "build-css": "cp develop/four.css dist",
-    "build-js": "browserify develop/four.js --outfile dist/four.dist.js --transform babelify",
+    "build-js": "browserify develop/four.js --outfile dist/four.dist.js --transform babelify --verbose",
     "watch": "npm run build && npm run watch-js & npm run watch-css & npm run watch-html & npm run start-server",
     "watch-html": "watch-spawn -p 'develop/index.html' npm run build-html",
     "watch-css": "watch-spawn --pattern 'develop/four.css' npm run build-css",
