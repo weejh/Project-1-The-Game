@@ -11,7 +11,7 @@ describe('checkWinner', () => {
       {textContent: 'X'}, {textContent: 'X'}, {textContent: 'X'},
       {textContent: 'X'}, {textContent: 'X'}, {textContent: 'X'}
     ]
-    expect(checkWinner(givenLoc, statusBoard, currentPlayer)).to.equal('X')
+    expect(checkWinner (column, player, statusBoard)).to.equal('X')
   })
   it('should return undefined if the game is still going', () => {
     const ongoing = [
