@@ -6,19 +6,9 @@ const expect = chai.expect
 
 describe('checkWinner', () => {
   it('should return the winner for a won game', () => {
-    const won = [
-      {textContent: 'X'}, {textContent: 'X'}, {textContent: 'X'},
-      {textContent: 'X'}, {textContent: 'X'}, {textContent: 'X'},
-      {textContent: 'X'}, {textContent: 'X'}, {textContent: 'X'}
-    ]
-    expect(checkWinner (column, player, statusBoard)).to.equal('X')
-  })
-  it('should return undefined if the game is still going', () => {
-    const ongoing = [
-      {textContent: ''}, {textContent: ''}, {textContent: ''},
-      {textContent: ''}, {textContent: ''}, {textContent: ''},
-      {textContent: ''}, {textContent: ''}, {textContent: ''}
-    ]
-    expect(findWinner(ongoing)).to.be.undefined
+    const column = '30'
+    const player = 'one'
+    const statusBoard = {10: 'one', 20: 'one', 30: 'one', '00': 'one'}
+    expect(checkWinner(column, player, statusBoard)).to.equal([10, 20, 30], '30', true)
   })
 })
