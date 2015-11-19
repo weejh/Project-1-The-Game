@@ -69,6 +69,7 @@ function dropChip (column) {
     if ((oneLocation < twoLocation)) updateStat(currentPlayer, twoLocation, column)
   } else completedColumn.find(ele => ele === column) ? column : completedColumn.push(column)
   //
+
   console.log('completedColumn: ' + completedColumn);
   console.log(statusBoard);
   // current player location
@@ -79,16 +80,12 @@ function dropChip (column) {
   if (checkWinner(currentPlayerlocation, currentPlayer)) {
     //
     // update wining status
-    document.getElementById('left4status').textContent = 'Player ' + currentPlayer.charAt(0).toUpperCase() + currentPlayer.slice(1) + ' wins'
+    endofGameStatus(('Player ' + currentPlayer.charAt(0).toUpperCase() + currentPlayer.slice(1) + ' wins'))
+//    document.getElementById('left4status').textContent = 'Player ' + currentPlayer.charAt(0).toUpperCase() + currentPlayer.slice(1) + ' wins'
+  //  document.getElementById('left3status').textContent = 'Please click Reset to start new game'
+    //
     // remove all event listener and wait for reset
-    body.removeEventListener('click', clickevent)
-    body.removeEventListener('mouseover', mouseoverevent)
-    body.removeEventListener('mouseout', mouseoutevent)
-    body.addEventListener('click', event => {
-      var reSet = event.target
-      if (reSet.id !== 'reset') return
-      document.location.reload(true)
-    })
+    endofGame()
   } else {
     // next player
     currentPlayer === 'one' ? currentPlayer = 'two' : currentPlayer = 'one'
@@ -176,4 +173,19 @@ function resetCursor () {
       p.style.cursor = 'default'
     })
   })
+}
+
+function endofGame () {
+  body.removeEventListener('click', clickevent)
+  body.removeEventListener('mouseover', mouseoverevent)
+  body.removeEventListener('mouseout', mouseoutevent)
+  body.addEventListener('click', event => {
+    var reSet = event.target
+    if (reSet.id !== 'reset') return
+    document.location.reload(true)
+  })
+}
+function endofGameStatus (messAge) {
+  document.getElementById('left4status').textContent = messAge
+  document.getElementById('left3status').textContent = 'Please click Reset to start new game'
 }

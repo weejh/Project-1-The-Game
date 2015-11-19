@@ -8,7 +8,9 @@
     "babel-preset-stage-0": "^6.1.2",
     "babelify": "^7.2.0",
     "browserify": "^12.0.1",
+    "chai": "^3.4.1",
     "http-server": "^0.8.5",
+    "mocha": "^2.3.4",
     "standard": "^5.3.1",
     "watch-spawn": "^1.0.6",
     "watchify": "^3.6.0"
