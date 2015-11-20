@@ -11,8 +11,9 @@ function clickevent (event) {
   if (board.className !== 'tileboard') return
   //
   // check if reset
-  if (board.id === 'reset') document.location.reload(true)
-  else {
+  if (board.id === 'reset') {
+    reStartgame()
+  } else {
     if (readStatusBoard(board.id).some(e => e === '')) {
       var cellLocation = dropChip(board.id)
       var winnerStatus = checkWinner(cellLocation, currentPlayer, statusBoard)
@@ -162,11 +163,25 @@ function endofGame (sLocation) {
   body.addEventListener('click', event => {
     var reSet = event.target
     if (reSet.id !== 'reset') return
-    document.location.reload(true)
+    console.log('reset')
+    reStartgame()
   })
 }
 
 function endofGameStatus (messAge) {
   document.getElementById('left4status').textContent = messAge
   document.getElementById('left3status').textContent = 'Please click Reset to start new game'
+}
+
+function reStartgame () {
+  console.log('in reStartgame')
+  currentPlayer = 'one'
+  body = document.querySelector('body')
+  statusBoard = {}
+  body.removeEventListener('click', clickevent)
+  body.removeEventListener('mouseover', mouseoverevent)
+  body.removeEventListener('mouseout', mouseoutevent)
+  body.addEventListener('click', clickevent)
+  body.addEventListener('mouseover', mouseoverevent)
+  body.addEventListener('mouseout', mouseoutevent)
 }
