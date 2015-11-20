@@ -1,4 +1,4 @@
-export function checkWinner (column, player, statusBoard) {
+export default function checkWinner (column, player, statusBoard) {
   // always check for next 3 location in all direction
   var rowGiven = parseInt(column.charAt(column.length - 1), 10)
   var colGiven = parseInt(column.charAt(column.length - column.length), 10)
