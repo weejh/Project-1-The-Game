@@ -1,7 +1,8 @@
 import {checkWinner, clearBoard} from './lib/module.js'
-var currentPlayer = 'one'
+var currentPlayer = '♡'
 var body = document.querySelector('body')
 var statusBoard = {}
+displayCellmessage('left4status', ('Player ' + currentPlayer))
 body.addEventListener('click', clickevent)
 body.addEventListener('mouseover', mouseoverevent)
 body.addEventListener('mouseout', mouseoutevent)
@@ -19,11 +20,11 @@ function clickevent (event) {
       var winnerStatus = checkWinner(cellLocation, currentPlayer, statusBoard)
       if (winnerStatus[2]) {
         highLightwinner(winnerStatus[0], winnerStatus[1])
-        endofGameStatus(('Player ' + currentPlayer.charAt(0).toUpperCase() + currentPlayer.slice(1) + ' wins'))
+        endofGameStatus(('Player ' + currentPlayer + ' wins'))
         endofGame(winnerStatus[1])
         return
       }
-      currentPlayer === 'one' ? currentPlayer = 'two' : currentPlayer = 'one'
+      currentPlayer === '♡' ? currentPlayer = '☆' : currentPlayer = '♡'
       var endofColumn = ['60', '61', '63', '64', '65', '66', '67']
       if (endofColumn.some(e => e === cellLocation)) {
         nextPlayer(cellLocation, currentPlayer)
@@ -92,8 +93,8 @@ function readStatusBoard (column) {
 
 function dropChip (column) {
 // location of the last cell occupied
-  var oneLocation = readStatusBoard(column).lastIndexOf('one')
-  var twoLocation = readStatusBoard(column).lastIndexOf('two')
+  var oneLocation = readStatusBoard(column).lastIndexOf('♡')
+  var twoLocation = readStatusBoard(column).lastIndexOf('☆')
   var cellLocation = ''
   if ((readStatusBoard(column).indexOf('') <= 6) && readStatusBoard(column).indexOf('') > -1) {
     if (oneLocation === twoLocation) {
@@ -112,7 +113,7 @@ function dropChip (column) {
 function nextPlayer (column, currentPlayer) {
   var chipLocation = 'chip' + column.charAt(column.length - 1)
   displayCellmessage(chipLocation, currentPlayer)
-  displayCellmessage('left4status', ('Player ' + currentPlayer.charAt(0).toUpperCase() + currentPlayer.slice(1)))
+  displayCellmessage('left4status', ('Player ' + currentPlayer))
 }
 
 function updateStat (player, row, column, statusArray) {
@@ -175,7 +176,7 @@ function endofGameStatus (messAge) {
 
 function reStartgame () {
   console.log('in reStartgame')
-  currentPlayer = 'one'
+  currentPlayer = '♡'
   body = document.querySelector('body')
   statusBoard = {}
   body.removeEventListener('click', clickevent)
@@ -183,7 +184,7 @@ function reStartgame () {
   body.removeEventListener('mouseout', mouseoutevent)
   clearBoard()
   displayCellmessage('left3status', '')
-  displayCellmessage('left4status', ('Player ' + currentPlayer.charAt(0).toUpperCase() + currentPlayer.slice(1)))
+  displayCellmessage('left4status', ('Player ' + currentPlayer))
   body.addEventListener('click', clickevent)
   body.addEventListener('mouseover', mouseoverevent)
   body.addEventListener('mouseout', mouseoutevent)
