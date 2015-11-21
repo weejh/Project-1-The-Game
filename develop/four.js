@@ -1,5 +1,5 @@
 import {checkWinner, clearBoard} from './lib/module.js'
-var currentPlayer = '♡'
+var currentPlayer = 'one'
 var body = document.querySelector('body')
 var statusBoard = {}
 displayCellmessage('left4status', ('Player ' + currentPlayer))
@@ -24,26 +24,36 @@ function clickevent (event) {
         endofGame(winnerStatus[1])
         return
       }
-      currentPlayer === '♡' ? currentPlayer = '☆' : currentPlayer = '♡'
+      currentPlayer === 'one' ? currentPlayer = 'two' : currentPlayer = 'one'
       var endofColumn = ['60', '61', '63', '64', '65', '66', '67']
       if (endofColumn.some(e => e === cellLocation)) {
         nextPlayer(cellLocation, currentPlayer)
       }
+      if (endofColumn.every(e => document.getElementById(e).textContent !== '')) {
+        console.log('check for end of col')
+        var chip = 'No more move, please click on reset'
+        var chipLocation = 'chip' + board.id.charAt(board.id.length - 1)
+        displayCellmessage('left4status', chip)
+        endofGame(chipLocation)
+        return
+      }
       nextPlayer(cellLocation, currentPlayer)
-    } else {
+    } /* else {
       var chipLocation = '6' + board.id.charAt(board.id.length - 1)
       winnerStatus = checkWinner(chipLocation, currentPlayer, statusBoard)
       if (winnerStatus[2]) {
         highLightwinner(winnerStatus[0], winnerStatus[1])
       }
+      console.log('check no winner')
       endofColumn = ['60', '61', '63', '64', '65', '66', '67']
       if (endofColumn.every(e => document.getElementById(e).textContent !== '')) {
+        console.log('check for end of col')
         var chip = 'No more move, please click on reset'
         chipLocation = 'chip' + board.id.charAt(board.id.length - 1)
         displayCellmessage('left4status', chip)
         endofGame(chipLocation)
       }
-    }
+    }*/
   }
 }
 
@@ -93,8 +103,8 @@ function readStatusBoard (column) {
 
 function dropChip (column) {
 // location of the last cell occupied
-  var oneLocation = readStatusBoard(column).lastIndexOf('♡')
-  var twoLocation = readStatusBoard(column).lastIndexOf('☆')
+  var oneLocation = readStatusBoard(column).lastIndexOf('one')
+  var twoLocation = readStatusBoard(column).lastIndexOf('two')
   var cellLocation = ''
   if ((readStatusBoard(column).indexOf('') <= 6) && readStatusBoard(column).indexOf('') > -1) {
     if (oneLocation === twoLocation) {
@@ -197,7 +207,7 @@ function endofGameStatus (messAge) {
 }
 
 function reStartgame () {
-  currentPlayer = '♡'
+  currentPlayer = 'one'
   body = document.querySelector('body')
   statusBoard = {}
   body.removeEventListener('click', clickevent)
