@@ -32,3 +32,18 @@ export function checkWinner (column, player, statusBoard) {
     })
   }
 }
+
+export function clearBoard () {
+  var col = ['0', '1', '2', '3', '4', '5', '6', '7']
+  var row = ['0', '1', '2', '3', '4', '5', '6']
+  row.forEach(erow => {
+    col.forEach(ecol => {
+      var cellLocation = document.getElementById(erow + ecol)
+      if (cellLocation.textContent !== '') {
+        cellLocation.textContent = ''
+        cellLocation.style.backgroundColor = 'black'
+        cellLocation.style.borderColor = 'green'
+      }
+    })
+  })
+}

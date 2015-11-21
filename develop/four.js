@@ -1,4 +1,4 @@
-import {checkWinner} from './lib/module.js'
+import {checkWinner, clearBoard} from './lib/module.js'
 var currentPlayer = 'one'
 var body = document.querySelector('body')
 var statusBoard = {}
@@ -24,7 +24,7 @@ function clickevent (event) {
         return
       }
       currentPlayer === 'one' ? currentPlayer = 'two' : currentPlayer = 'one'
-      var endofColumn = ['60', '61', '63', '64', '65', '66']
+      var endofColumn = ['60', '61', '63', '64', '65', '66', '67']
       if (endofColumn.some(e => e === cellLocation)) {
         nextPlayer(cellLocation, currentPlayer)
       }
@@ -35,7 +35,7 @@ function clickevent (event) {
       if (winnerStatus[2]) {
         highLightwinner(winnerStatus[0], winnerStatus[1])
       }
-      endofColumn = ['60', '61', '63', '64', '65', '66']
+      endofColumn = ['60', '61', '63', '64', '65', '66', '67']
       if (endofColumn.every(e => document.getElementById(e).textContent !== '')) {
         var chip = 'No more move, please click on reset'
         chipLocation = 'chip' + board.id.charAt(board.id.length - 1)
@@ -143,7 +143,7 @@ function highLightwinner (winnerCoordinate, winnerLocation) {
 
 function resetCursor () {
   var eleA = ['chip', '0', '1', '2', '3', '4', '5', '6']
-  var eleB = ['0', '1', '2', '3', '4', '5', '6']
+  var eleB = ['0', '1', '2', '3', '4', '5', '6', '7']
   eleA.forEach(ele1 => {
     eleB.forEach(ele2 => {
       var pp = ele1 + ele2
@@ -181,6 +181,9 @@ function reStartgame () {
   body.removeEventListener('click', clickevent)
   body.removeEventListener('mouseover', mouseoverevent)
   body.removeEventListener('mouseout', mouseoutevent)
+  clearBoard()
+  displayCellmessage('left3status', '')
+  displayCellmessage('left4status', ('Player ' + currentPlayer.charAt(0).toUpperCase() + currentPlayer.slice(1)))
   body.addEventListener('click', clickevent)
   body.addEventListener('mouseover', mouseoverevent)
   body.addEventListener('mouseout', mouseoutevent)
