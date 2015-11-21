@@ -1,4 +1,4 @@
-import {checkWinner, clearBoard} from './lib/module.js'
+import {checkWinner, clearBoard, moveChip} from './lib/module.js'
 var currentPlayer = '♡'
 var body = document.querySelector('body')
 var statusBoard = {}
@@ -117,9 +117,15 @@ function nextPlayer (column, currentPlayer) {
 }
 
 function updateStat (player, row, column, statusArray) {
-  statusArray[row] = player
+  console.log(statusArray)
+//  statusArray[row] = player
+  console.log(statusArray)
+  console.log('player => ' + player)
+  console.log('row => ' + row)
+  console.log('column => ' + column)
   // location of last cell
   if ((row + 1) > 6) return
+  moveChip(column)
   var cellLocation = (row + 1).toString(10) + column.charAt(column.length - 1)
   displayCellmessage(cellLocation, player)
   statusBoard[cellLocation] = player
@@ -164,7 +170,6 @@ function endofGame (sLocation) {
   body.addEventListener('click', event => {
     var reSet = event.target
     if (reSet.id !== 'reset') return
-    console.log('reset')
     reStartgame()
   })
 }
@@ -175,7 +180,6 @@ function endofGameStatus (messAge) {
 }
 
 function reStartgame () {
-  console.log('in reStartgame')
   currentPlayer = '♡'
   body = document.querySelector('body')
   statusBoard = {}

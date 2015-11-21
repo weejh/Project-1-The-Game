@@ -47,3 +47,10 @@ export function clearBoard () {
     })
   })
 }
+
+export function moveChip (finalDest) {
+  var sourceLocation = 'chip' + finalDest.charAt(finalDest.length - 1)
+  var finialLocaiton = finalDest
+  finialLocaiton
+  sourceLocation
+}
