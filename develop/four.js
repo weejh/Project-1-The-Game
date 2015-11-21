@@ -1,4 +1,4 @@
-import {checkWinner, clearBoard, moveChip} from './lib/module.js'
+import {checkWinner, clearBoard} from './lib/module.js'
 var currentPlayer = '♡'
 var body = document.querySelector('body')
 var statusBoard = {}
@@ -117,19 +117,36 @@ function nextPlayer (column, currentPlayer) {
 }
 
 function updateStat (player, row, column, statusArray) {
-  console.log(statusArray)
+//  console.log(statusArray)
 //  statusArray[row] = player
-  console.log(statusArray)
-  console.log('player => ' + player)
-  console.log('row => ' + row)
-  console.log('column => ' + column)
+//  console.log(statusArray)
+//  console.log('player => ' + player)
+//  console.log('row => ' + row)
+//  console.log('column => ' + column)
   // location of last cell
   if ((row + 1) > 6) return
-  moveChip(column)
   var cellLocation = (row + 1).toString(10) + column.charAt(column.length - 1)
+/*
+  var sourceLocation = 'chip' + cellLocation.charAt(cellLocation.length - 1)
+  var p1 = document.getElementById(sourceLocation)
+  p1.style.position = 'absolute'
+  setInterval(moveChip(), 500)
+  */
   displayCellmessage(cellLocation, player)
   statusBoard[cellLocation] = player
   return cellLocation
+/*
+  function moveChip () {
+    var x = p1.style.top || '10px'
+    x = parseInt(x, 10)
+    x = x + 1
+    if (x < 1000) {
+      p1.style.top = (x).toString(10) + 'px'
+    }
+    console.log(p1)
+    console.log(p1.style.top)
+  }
+  */
 }
 
 function highLightwinner (winnerCoordinate, winnerLocation) {
