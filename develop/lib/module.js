@@ -71,24 +71,8 @@ function updateStat (player, row, column, statusArray, inOrout) {
   // location of last cell
   if ((row + 1) > 6) return
   var cellLocation = (row + 1).toString(10) + column.charAt(column.length - 1)
-//  displayCellmessage(cellLocation, player)
-//  statusBoard[cellLocation] = player
-//  console.log('player => ' + player + '   inOrout => ' + inOrout + '  cellLocation => ' + cellLocation)
   let pX = document.getElementById(cellLocation)
   inOrout ? pX.style.borderColor = '#AAE9E5' : pX.style.borderColor = 'green'
-  if (inOrout) {
-    pX.textContent = player
-  } else {
-    let cellRowT = parseInt(cellLocation.charAt(cellLocation.length - cellLocation.length), 10)
-    let cellCol = cellLocation.charAt(cellLocation.length - 1)
-    console.log(' before cellrow => ' + cellRowT)
-    cellRowT = cellRowT - 1
-    console.log(' cellrow => ' + cellRowT)
-    let cellRow = cellRowT.toString(10)
-    let pXa = document.getElementById(cellRow + cellCol)
-    console.log(' moveout cellLocation=> ' + cellRow + cellCol)
-    pXa.textContent = ''
-  }
 
   return cellLocation
 }

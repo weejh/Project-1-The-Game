@@ -46,25 +46,16 @@ function mouseoverevent (event) {
   var board = event.target
   if (board.className !== 'tileboard') return
   if (board.id === 'reset') return
-  console.log('mouseover => ' + currentPlayer)
-//  console.log(readStatusBoard(board.id))
-  var cellLocation = nextChip(board.id, currentPlayer, readStatusBoard(board.id), true)
-  console.log('mouseover => ' + cellLocation)
-//  updateStat (currentPlayerplayer, row, column, readStatusBoard(board.id))
-//  highlightColumn(board.id, '#AAE9E5')
+  nextChip(board.id, currentPlayer, readStatusBoard(board.id), true)
   var chipLocation = 'chip' + board.id.charAt(board.id.length - 1)
   displayCellmessage(chipLocation, currentPlayer)
-//  document.getElementById(chipLocation).style.borderColor = '#AAE9E5'
 }
 
 function mouseoutevent (event) {
   var board = event.target
   if (board.className !== 'tileboard') return
   if (board.id === 'reset') return
-//  console.log('mouseout=> ' + currentPlayer)
-//  console.log('mouseout=> ' + readStatusBoard(board.id))
-  var cellLocation = nextChip(board.id, currentPlayer, readStatusBoard(board.id), false)
-  console.log('mouseout=> ' + cellLocation)
+  nextChip(board.id, currentPlayer, readStatusBoard(board.id), false)
   var chipLocation = 'chip' + board.id.charAt(board.id.length - 1)
   displayCellmessage(chipLocation, '')
   document.getElementById(chipLocation).style.borderColor = 'black'
