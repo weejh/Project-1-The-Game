@@ -8,8 +8,8 @@ Your goal is to get four marking in a row either vertically, horizontally or dia
 This classic game has other names like Four Up, Plot Four, Find Four, Fourplay, Four in a Row and Four in a Line.
 
 Issues:
-1. No score history.
-2. Lacking of animation/costmetic.
-3. Need further recode and review.
-4. Not fully tested.
-5. Not mobile friendly.
+* No score history.
+* Lacking of animation/costmetic.
+* Need further recode and review.
+* Not fully tested.
+* Not mobile friendly.
