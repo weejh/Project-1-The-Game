@@ -1,5 +1,5 @@
-import {checkWinner, clearBoard} from './lib/module.js'
-var currentPlayer = 'one'
+import {checkWinner, clearBoard, nextChip} from './lib/module.js'
+var currentPlayer = '♢'
 var body = document.querySelector('body')
 var statusBoard = {}
 displayCellmessage('left4status', ('Player ' + currentPlayer))
@@ -24,7 +24,7 @@ function clickevent (event) {
         endofGame(winnerStatus[1])
         return
       }
-      currentPlayer === 'one' ? currentPlayer = 'two' : currentPlayer = 'one'
+      currentPlayer === '♢' ? currentPlayer = '☆' : currentPlayer = '♢'
       var endofColumn = ['60', '61', '63', '64', '65', '66', '67']
       if (endofColumn.some(e => e === cellLocation)) {
         nextPlayer(cellLocation, currentPlayer)
@@ -38,22 +38,7 @@ function clickevent (event) {
         return
       }
       nextPlayer(cellLocation, currentPlayer)
-    } /* else {
-      var chipLocation = '6' + board.id.charAt(board.id.length - 1)
-      winnerStatus = checkWinner(chipLocation, currentPlayer, statusBoard)
-      if (winnerStatus[2]) {
-        highLightwinner(winnerStatus[0], winnerStatus[1])
-      }
-      console.log('check no winner')
-      endofColumn = ['60', '61', '63', '64', '65', '66', '67']
-      if (endofColumn.every(e => document.getElementById(e).textContent !== '')) {
-        console.log('check for end of col')
-        var chip = 'No more move, please click on reset'
-        chipLocation = 'chip' + board.id.charAt(board.id.length - 1)
-        displayCellmessage('left4status', chip)
-        endofGame(chipLocation)
-      }
-    }*/
+    }
   }
 }
 
@@ -61,17 +46,25 @@ function mouseoverevent (event) {
   var board = event.target
   if (board.className !== 'tileboard') return
   if (board.id === 'reset') return
-  highlightColumn(board.id, '#AAE9E5')
+  console.log('mouseover => ' + currentPlayer)
+//  console.log(readStatusBoard(board.id))
+  var cellLocation = nextChip(board.id, currentPlayer, readStatusBoard(board.id), true)
+  console.log('mouseover => ' + cellLocation)
+//  updateStat (currentPlayerplayer, row, column, readStatusBoard(board.id))
+//  highlightColumn(board.id, '#AAE9E5')
   var chipLocation = 'chip' + board.id.charAt(board.id.length - 1)
   displayCellmessage(chipLocation, currentPlayer)
-  document.getElementById(chipLocation).style.borderColor = '#AAE9E5'
+//  document.getElementById(chipLocation).style.borderColor = '#AAE9E5'
 }
 
 function mouseoutevent (event) {
   var board = event.target
   if (board.className !== 'tileboard') return
   if (board.id === 'reset') return
-  highlightColumn(board.id, 'green')
+//  console.log('mouseout=> ' + currentPlayer)
+//  console.log('mouseout=> ' + readStatusBoard(board.id))
+  var cellLocation = nextChip(board.id, currentPlayer, readStatusBoard(board.id), false)
+  console.log('mouseout=> ' + cellLocation)
   var chipLocation = 'chip' + board.id.charAt(board.id.length - 1)
   displayCellmessage(chipLocation, '')
   document.getElementById(chipLocation).style.borderColor = 'black'
@@ -103,8 +96,8 @@ function readStatusBoard (column) {
 
 function dropChip (column) {
 // location of the last cell occupied
-  var oneLocation = readStatusBoard(column).lastIndexOf('one')
-  var twoLocation = readStatusBoard(column).lastIndexOf('two')
+  var oneLocation = readStatusBoard(column).lastIndexOf('♢')
+  var twoLocation = readStatusBoard(column).lastIndexOf('☆')
   var cellLocation = ''
   if ((readStatusBoard(column).indexOf('') <= 6) && readStatusBoard(column).indexOf('') > -1) {
     if (oneLocation === twoLocation) {
@@ -144,6 +137,9 @@ function updateStat (player, row, column, statusArray) {
   */
   displayCellmessage(cellLocation, player)
   statusBoard[cellLocation] = player
+  let pX = document.getElementById(cellLocation)
+  pX.style.borderColor = 'green'
+  nextChip(cellLocation, currentPlayer, readStatusBoard(cellLocation), true)
   return cellLocation
 /*
   function moveChip () {
@@ -164,9 +160,9 @@ function highLightwinner (winnerCoordinate, winnerLocation) {
   highlightColumn(winnerLocation, 'green')
   resetCursor()
   document.getElementById('reset').style.cursor = 'pointer'
-  var chipLocation = 'chip' + winnerLocation.charAt(winnerLocation.length - 1)
-  displayCellmessage(chipLocation, '')
-  document.getElementById(chipLocation).style.borderColor = 'black'
+//  var chipLocation = 'chip' + winnerLocation.charAt(winnerLocation.length - 1)
+//  displayCellmessage(chipLocation, '')
+//  document.getElementById(chipLocation).style.borderColor = 'black'
   winnerCoordinate.forEach(ele => {
     var d = document.getElementById(ele)
     d.style.color = 'white'
@@ -207,7 +203,7 @@ function endofGameStatus (messAge) {
 }
 
 function reStartgame () {
-  currentPlayer = 'one'
+  currentPlayer = '♢'
   body = document.querySelector('body')
   statusBoard = {}
   body.removeEventListener('click', clickevent)
