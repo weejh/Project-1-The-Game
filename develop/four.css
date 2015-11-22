@@ -14,15 +14,13 @@ body {
 .tilestatus {
   font-family: sans-serif;
   height: 50px;
-  width: 100px;
+  width: 150px;
   color: white;
   vertical-align: top;
   text-align: center;
   font-size: 10px;
-  border-left: 1px solid red;
-  border-right: 1px solid red;
-  padding: 0px 10px 0px 10px
-  border-radius: 5px;
+  border-left: 0px solid red;
+  border-right: 0px solid red;
 }
 .tileblank {
   font-family: sans-serif;
@@ -33,23 +31,18 @@ body {
   text-align: center;
   font-size: 10px;
   border: 1px solid black;
-  border-radius: 5px;
 }
 .tileboard {
   font-family: sans-serif;
-  height: 30px;
+  height: 35px;
   width: 50px;
   color: white;
   vertical-align: center;
   text-align: center;
-  font-size: 10px;
+  font-size: 15px;
   border: 1px solid green;
   border-radius: 1px;
-  padding-top: 20px;
-}
-
-.drop {
-  animation: bounce 1500ms infinite ;
+  padding-top: 15px;
 }
 
 .tileboard:hover{
@@ -58,17 +51,16 @@ body {
 
 
 #lefttopstatus, #righttopblank1 {
-  border: 1px solid black;
-  border-radius: 5px;
+  border: black;
 }
 
 #left6status, #right6status {
   border-top: 1px solid red;
-  border-radius: 5px;
+  border-radius: 15px;
 }
 #left0status, #right0status {
   border-bottom: 1px solid red;
-  border-radius: 5px;
+  border-radius: 15px;
 }
 
 #left {
@@ -83,10 +75,11 @@ body {
   border-radius: 5px;
 }
 
-#chip0, #chip1, #chip2, #chip3, #chip4, #chip5, #chip6 {
+#chip0, #chip1, #chip2, #chip3, #chip4, #chip5, #chip6, #chip7 {
   border: 1px solid black;
-  border-radius: 5px
+  border-radius: 5px;
 }
+
 #reset {
   font-family: sans-serif;
   height: 20px;
@@ -97,16 +90,6 @@ body {
   padding-top: 7px;
   margin: 10px;
   border: 1px solid yellow;
-  border-radius: 10px
-}
-
-@keyframes drop {
-  0%, 100% {
-    bottom: 0;
-    animation-timing-function: ease-out;
-  }
-  50% {
-    bottom: 360px;
-    animation-timing-function: ease-in;
-  }
+  border-radius: 10px;
+  font-size: 10px;
 }
