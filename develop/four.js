@@ -55,10 +55,16 @@ function mouseoutevent (event) {
   var board = event.target
   if (board.className !== 'tileboard') return
   if (board.id === 'reset') return
-  nextChip(board.id, currentPlayer, readStatusBoard(board.id), false)
+  var cellLocation = nextChip(board.id, currentPlayer, readStatusBoard(board.id), false)
   var chipLocation = 'chip' + board.id.charAt(board.id.length - 1)
   displayCellmessage(chipLocation, '')
   document.getElementById(chipLocation).style.borderColor = 'black'
+  var colGiven = cellLocation.charAt(cellLocation.length - 1)
+  var rowGiven = parseInt(cellLocation.charAt(cellLocation.length - cellLocation.length), 10) - 1
+  var cellLocationT = rowGiven.toString(10) + colGiven
+  console.log(cellLocationT)
+  document.getElementById(cellLocationT).style.borderColor = 'green'
+  displayCellmessage(cellLocationT, '')
 }
 
 function highlightColumn (column, Color) {
@@ -119,13 +125,14 @@ function updateStat (player, row, column, statusArray) {
 //  console.log('column => ' + column)
   // location of last cell
   if ((row + 1) > 6) return
-  var cellLocation = (row + 1).toString(10) + column.charAt(column.length - 1)
+  var cellLocation = (row).toString(10) + column.charAt(column.length - 1)
 /*
   var sourceLocation = 'chip' + cellLocation.charAt(cellLocation.length - 1)
   var p1 = document.getElementById(sourceLocation)
   p1.style.position = 'absolute'
   setInterval(moveChip(), 500)
   */
+  if (row === -1) cellLocation = '0' + column.charAt(column.length - 1)
   displayCellmessage(cellLocation, player)
   statusBoard[cellLocation] = player
   let pX = document.getElementById(cellLocation)
