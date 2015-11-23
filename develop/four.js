@@ -47,8 +47,9 @@ function mouseoverevent (event) {
   if (board.className !== 'tileboard') return
   if (board.id === 'reset') return
   nextChip(board.id, currentPlayer, readStatusBoard(board.id), true)
-  var chipLocation = 'chip' + board.id.charAt(board.id.length - 1)
-  displayCellmessage(chipLocation, currentPlayer)
+//  var chipLocation = 'chip' + board.id.charAt(board.id.length - 1)
+//  displayCellmessage(chipLocation, currentPlayer)
+  console.log(currentPlayer)
 }
 
 function mouseoutevent (event) {
@@ -58,13 +59,16 @@ function mouseoutevent (event) {
   var cellLocation = nextChip(board.id, currentPlayer, readStatusBoard(board.id), false)
   var chipLocation = 'chip' + board.id.charAt(board.id.length - 1)
   displayCellmessage(chipLocation, '')
+//  displayCellmessage(cellLocation, currentPlayer)
   document.getElementById(chipLocation).style.borderColor = 'black'
   var colGiven = cellLocation.charAt(cellLocation.length - 1)
   var rowGiven = parseInt(cellLocation.charAt(cellLocation.length - cellLocation.length), 10) - 1
   var cellLocationT = rowGiven.toString(10) + colGiven
   console.log(cellLocationT)
+//  console.log(currentPlayer)
   document.getElementById(cellLocationT).style.borderColor = 'green'
   displayCellmessage(cellLocationT, '')
+//  displayCellmessage(cellLocationT, currentPlayer)
 }
 
 function highlightColumn (column, Color) {
@@ -111,9 +115,14 @@ function dropChip (column) {
 }
 
 function nextPlayer (column, currentPlayer) {
-  var chipLocation = 'chip' + column.charAt(column.length - 1)
-  displayCellmessage(chipLocation, currentPlayer)
+//  var chipLocation = 'chip' + column.charAt(column.length - 1)
+//  displayCellmessage(chipLocation, currentPlayer)
   displayCellmessage('left4status', ('Player ' + currentPlayer))
+  var colGiven = column.charAt(column.length - 1)
+  var rowGiven = parseInt(column.charAt(column.length - column.length), 10) + 1
+  var cellLocationT = rowGiven.toString(10) + colGiven
+  console.log(currentPlayer + ' | ' + cellLocationT)
+  if (rowGiven < 7) displayCellmessage(cellLocationT, currentPlayer)
 }
 
 function updateStat (player, row, column, statusArray) {
