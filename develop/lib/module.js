@@ -73,6 +73,6 @@ function updateStat (player, row, column, statusArray, inOrout) {
   var cellLocation = (row + 1).toString(10) + column.charAt(column.length - 1)
   let pX = document.getElementById(cellLocation)
   inOrout ? pX.style.borderColor = '#AAE9E5' : pX.style.borderColor = 'green'
-
+  inOrout ? pX.textContent = player : pX.textContent = ''
   return cellLocation
 }
