@@ -20,7 +20,7 @@ function clickevent (event) {
     console.log('in click')
     console.log(readStatusBoard(board.id))
     var cellLocation = dropChip(board.id)
-    currentBaordstatus[cellLocation] = currentPlayer
+
   //  if (readStatusBoard(board.id).some(e => e === '')) {
     //  var cellLocation = dropChip(board.id)
     console.log('location of chip dropped => ' + cellLocation)
@@ -70,7 +70,7 @@ function mouseoutevent (event) {
   displayCellmessage(chipLocation, '')
   document.getElementById(chipLocation).style.borderColor = 'black'
 //  console.log('mouseout => ' + cellLocation)
- //var cellLocationT = '6' + board.id.charAt(board.id.length - 1)
+ // var cellLocationT = '6' + board.id.charAt(board.id.length - 1)
 console.log('mouseout => '+ cellLocation)
  console.log(currentBaordstatus[cellLocation])
  //if (currentBaordstatus[cellLocation]== '') {
@@ -82,7 +82,7 @@ console.log('mouseout => '+ cellLocation)
     cellLocationT = '6' + board.id.charAt(board.id.length - 1)
     console.log(readStatusBoard(board.id))
     document.getElementById(cellLocationT).style.borderColor = 'green'
-    displayCellmessage(cellLocationT, '')
+    if (currentBaordstatus[cellLocationT]=== '') displayCellmessage(cellLocationT, '')
     /* if (currentPlayer !== previousPlayer) {
       console.log('in change palyer  ' + currentPlayer + ' | ' + previousPlayer)
       currentPlayer === '♢' ? currentPlayer = '☆' : currentPlayer = '♢'
@@ -122,7 +122,31 @@ function readStatusBoard (column) {
   })
   return statusArray
 }
+function dropChip (column) {
+  var checkA = ['0', '1', '2', '3', '4', '5', '6']
+  var colG = column.charAt(column.length - 1)
+  var cellLocation = ''
+  console.log('col => ' + colG)
+  var arr = checkA.map(e => { return currentBaordstatus[e + colG] })
+  console.log(arr.indexOf(undefined))
+  console.log(currentBaordstatus)
 
+  var rowG = arr.indexOf(undefined)
+  if (rowG === -1) {//  console.log('foreach => ' + currentBaordstatus[e + colG])
+  // console.log('drop chip => ' + rowG.toString(10) + colG)
+  //  currentBaordstatus[rowG.toString(10) + colG] = currentPlayer
+    console.log( 'in -1')
+    console.log(currentBaordstatus)
+    if (currentBaordstatus['6' + colG]=== '') currentBaordstatus['6' + colG] = currentPlayer
+    return '6' + colG
+  } else {
+
+    currentBaordstatus[rowG.toString(10) + colG] = currentPlayer
+
+  return rowG.toString(10) + colG
+}
+}
+/*
 function dropChip (column) {
 // location of the last cell occupied
   var oneLocation = readStatusBoard(column).lastIndexOf('♢')
@@ -139,9 +163,11 @@ function dropChip (column) {
       cellLocation = updateStat(currentPlayer, twoLocation, column, readStatusBoard(column))
     }
   }
+  console.log('drop chip no check =>  oneLocation | twoLocation ' + oneLocation +'  ' + twoLocation)
+  console.log(currentBaordstatus)
   return cellLocation
 }
-
+*/
 function nextPlayer (column, currentPlayer) {
   displayCellmessage('left4status', ('Player ' + currentPlayer))
   var colGiven = column.charAt(column.length - 1)
