@@ -3,6 +3,7 @@ var currentPlayer = '♢'
 var previousPlayer = ''
 var body = document.querySelector('body')
 var statusBoard = {}
+var currentBaordstatus = {}
 displayCellmessage('left4status', ('Player ' + currentPlayer))
 body.addEventListener('click', clickevent)
 body.addEventListener('mouseover', mouseoverevent)
@@ -16,32 +17,39 @@ function clickevent (event) {
   if (board.id === 'reset') {
     reStartgame()
   } else {
-    if (readStatusBoard(board.id).some(e => e === '')) {
-      var cellLocation = dropChip(board.id)
-      var winnerStatus = checkWinner(cellLocation, currentPlayer, statusBoard)
-      if (winnerStatus[2]) {
+    console.log('in click')
+    console.log(readStatusBoard(board.id))
+    var cellLocation = dropChip(board.id)
+    currentBaordstatus[cellLocation] = currentPlayer
+  //  if (readStatusBoard(board.id).some(e => e === '')) {
+    //  var cellLocation = dropChip(board.id)
+    console.log('location of chip dropped => ' + cellLocation)
+    //  currentBaordstatus[cellLocation] = currentPlayer
+    //  console.log(currentBaordstatus)
+    var winnerStatus = checkWinner(cellLocation, currentPlayer, statusBoard)
+    if (winnerStatus[2]) {
   //      console.log('winner => ' + winnerStatus[1])
-        highLightwinner(winnerStatus[0], winnerStatus[1])
-        endofGameStatus(('Player ' + currentPlayer + ' wins'))
-        endofGame(winnerStatus[1])
-        return
-      }
-      previousPlayer = currentPlayer
-      currentPlayer === '♢' ? currentPlayer = '☆' : currentPlayer = '♢'
-      var endofColumn = ['60', '61', '63', '64', '65', '66', '67']
-      if (endofColumn.some(e => e === cellLocation)) {
-        nextPlayer(cellLocation, currentPlayer)
-      }
-      if (endofColumn.every(e => document.getElementById(e).textContent !== '')) {
-//        console.log('check for end of col')
-        var chip = 'No more move, please click on reset'
-        var chipLocation = 'chip' + board.id.charAt(board.id.length - 1)
-        displayCellmessage('left4status', chip)
-        endofGame(chipLocation)
-        return
-      }
-      nextPlayer(cellLocation, currentPlayer)
+      highLightwinner(winnerStatus[0], winnerStatus[1])
+      endofGameStatus(('Player ' + currentPlayer + ' wins'))
+      endofGame(winnerStatus[1])
+      return
     }
+    previousPlayer = currentPlayer
+    currentPlayer === '♢' ? currentPlayer = '☆' : currentPlayer = '♢'
+    var endofColumn = ['60', '61', '63', '64', '65', '66', '67']
+    if (endofColumn.some(e => e === cellLocation)) {
+      nextPlayer(cellLocation, currentPlayer)
+      document.getElementById(cellLocation).style.borderColor = 'green'
+    }
+    if (endofColumn.every(e => document.getElementById(e).textContent !== '')) {
+//        console.log('check for end of col')
+      var chip = 'No more move, please click on reset'
+      var chipLocation = 'chip' + board.id.charAt(board.id.length - 1)
+      displayCellmessage('left4status', chip)
+      endofGame(chipLocation)
+      return
+    }
+    nextPlayer(cellLocation, currentPlayer)
   }
 }
 
@@ -61,16 +69,27 @@ function mouseoutevent (event) {
   var chipLocation = 'chip' + board.id.charAt(board.id.length - 1)
   displayCellmessage(chipLocation, '')
   document.getElementById(chipLocation).style.borderColor = 'black'
+//  console.log('mouseout => ' + cellLocation)
+ //var cellLocationT = '6' + board.id.charAt(board.id.length - 1)
+console.log('mouseout => '+ cellLocation)
+ console.log(currentBaordstatus[cellLocation])
+ //if (currentBaordstatus[cellLocation]== '') {
   if (readStatusBoard(board.id).every(e => e !== '')) {
+  //  console.log('in check')
     cellLocationT = 'chip' + board.id.charAt(board.id.length - 1)
     document.getElementById(cellLocationT).style.borderColor = 'black'
     displayCellmessage(cellLocationT, '')
     cellLocationT = '6' + board.id.charAt(board.id.length - 1)
+    console.log(readStatusBoard(board.id))
     document.getElementById(cellLocationT).style.borderColor = 'green'
-    if (currentPlayer !== previousPlayer) {
+    displayCellmessage(cellLocationT, '')
+    /* if (currentPlayer !== previousPlayer) {
+      console.log('in change palyer  ' + currentPlayer + ' | ' + previousPlayer)
       currentPlayer === '♢' ? currentPlayer = '☆' : currentPlayer = '♢'
       displayCellmessage('left4status', ('Player ' + currentPlayer))
+
     }
+    */
     return
   }
   var colGiven = cellLocation.charAt(cellLocation.length - 1)
@@ -109,7 +128,7 @@ function dropChip (column) {
   var oneLocation = readStatusBoard(column).lastIndexOf('♢')
   var twoLocation = readStatusBoard(column).lastIndexOf('☆')
   var cellLocation = ''
-  if ((readStatusBoard(column).indexOf('') <= 6) && readStatusBoard(column).indexOf('') > -1) {
+  if ((readStatusBoard(column).indexOf('') < 7) && readStatusBoard(column).indexOf('') > -1) {
     if (oneLocation === twoLocation) {
       cellLocation = updateStat(currentPlayer, -1, column, readStatusBoard(column))
     }
