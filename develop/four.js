@@ -2,7 +2,7 @@ import {checkWinner, clearBoard, nextChip} from './lib/module.js'
 var currentPlayer = '♢'
 var previousPlayer = ''
 var body = document.querySelector('body')
-var statusBoard = {}
+// var statusBoard = {}
 var currentBoardstatus = {}
 displayCellmessage('left4status', ('Player ' + currentPlayer))
 body.addEventListener('click', clickevent)
@@ -108,12 +108,12 @@ function dropChip (column) {
   if (rowG === -1) {
     if (currentBoardstatus['6' + colG] === '') {
       currentBoardstatus['6' + colG] = currentPlayer
-      statusBoard['6' + colG] = currentPlayer
+  //    statusBoard['6' + colG] = currentPlayer
     }
     return '6' + colG
   } else {
     currentBoardstatus[rowG.toString(10) + colG] = currentPlayer
-    statusBoard[rowG.toString(10) + colG] = currentPlayer
+  //  statusBoard[rowG.toString(10) + colG] = currentPlayer
     document.getElementById(rowG.toString(10) + colG).style.borderColor = 'green'
     if (rowG !== 6) document.getElementById((rowG + 1).toString(10) + colG).style.borderColor = '#AAE9E5'
     currentPlayer === '♢' ? currentPlayer = '☆' : currentPlayer = '♢'
@@ -215,7 +215,8 @@ function endofGameStatus (messAge) {
 function reStartgame () {
   currentPlayer = '♢'
   body = document.querySelector('body')
-  statusBoard = {}
+//  statusBoard = {}
+  currentBoardstatus = {}
   body.removeEventListener('click', clickevent)
   body.removeEventListener('mouseover', mouseoverevent)
   body.removeEventListener('mouseout', mouseoutevent)
