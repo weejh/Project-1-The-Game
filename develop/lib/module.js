@@ -1,13 +1,14 @@
 export function checkWinner (column, player, statusBoard) {
   // always check for next 3 location in all direction
-  var rowGiven = parseInt(column.charAt(column.length - 1), 10)
-  var colGiven = parseInt(column.charAt(column.length - column.length), 10)
+  var colGiven = parseInt(column.charAt(column.length - 1), 10)
+  var rowGiven = parseInt(column.charAt(column.length - column.length), 10)
   var indexArray = [-1, 0, 1]
   var arrayProcess = []
   var arrayCoordinate = []
   var arrayCoordinatewinner4 = []
   var winner4 = false
   var aStatus = []
+  // required status of the board, location and its player
   // compute winning status
   computeStatus([1, 2, 3])
   if (aStatus.some(e => e === true)) return [arrayCoordinatewinner4, column, true]
@@ -21,9 +22,10 @@ export function checkWinner (column, player, statusBoard) {
         elementRequired.forEach((element, elementIndex) => {
           var column = ((columnIndex * element) + colGiven).toString(10)
           var row = ((rowIndex * element) + rowGiven).toString(10)
-          arrayCoordinate[elementIndex] = (column + row)
-          arrayProcess[elementIndex] = statusBoard[column + row]
+          arrayCoordinate[elementIndex] = (row + column)
+          arrayProcess[elementIndex] = statusBoard[row + column]
         })
+//        console.log('out => ' + arrayCoordinate + ' | ' + arrayProcess + ' | ' + player)
         winner4 = (arrayCoordinate.every(cord => cord !== column) && arrayProcess.every(ele => ele === player))
         winner4 ? arrayCoordinatewinner4 = arrayCoordinate : arrayCoordinate = []
         aStatus.push(winner4)
@@ -64,6 +66,9 @@ export function nextChip (column, currentPlayer, statusBoard, inOrout) {
       cellLocation = updateStat(currentPlayer, twoLocation, column, statusBoard, inOrout)
     }
   }
+//  console.log('next chip, column | cellLocation => ' + column + ' | ' + cellLocation)
+//  console.log(statusBoard)
+//  console.log('oneLocation | twoLocation => ' + oneLocation + ' | ' + twoLocation)
   return cellLocation
 }
 
