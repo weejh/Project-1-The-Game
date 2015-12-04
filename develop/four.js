@@ -2,7 +2,6 @@ import {checkWinner, clearBoard, nextChip} from './lib/module.js'
 var currentPlayer = '♢'
 var previousPlayer = ''
 var body = document.querySelector('body')
-// var statusBoard = {}
 var currentBoardstatus = {}
 displayCellmessage('left4status', ('Player ' + currentPlayer))
 body.addEventListener('click', clickevent)
